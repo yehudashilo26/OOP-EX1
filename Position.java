@@ -1,10 +1,14 @@
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Position {
     private Position right, left, up, down;
     private ConcretePiece piece;
     private int row;
     private int col;
+    private List<Piece> piecesOn_pos;
 
     public Position getRight() {
         if (this==null)
@@ -74,7 +78,8 @@ public class Position {
     public Position(int row, int col){
         this.row = row;
         this.col = col;
-        piece = null;
+        this.piece = null;
+        this.piecesOn_pos = new LinkedList<>();
     }
 
     public boolean isACorner(int num_of_rows, int num_of_columns){
@@ -85,5 +90,16 @@ public class Position {
             is_corner |= Arrays.equals(p_coordinates, corner);
         }
         return is_corner;
+    }
+    public void addPiece(Piece piece1){
+        piecesOn_pos.add(piece1);
+    }
+    public int getNumberOfStep(){
+        return new HashSet<>(piecesOn_pos).size();
+    }
+
+    @Override
+    public String toString() {
+        return "("+row+","+col+")";
     }
 }

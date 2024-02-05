@@ -57,11 +57,13 @@ public class Board {
     }
 
     public Position placePiece(ConcretePiece piece, int row, int col){
-            Position board_pos = getPosition(row, col);
-            if (board_pos != null) {
-                board_pos.setPiece(piece);
-            }
-            return board_pos;
+
+        Position board_pos = getPosition(row, col);
+        if (board_pos != null) {
+            board_pos.setPiece(piece);
+            board_pos.addPiece(piece);
+        }
+        return board_pos;
     }
 
     public Position placePiece(ConcretePiece piece, Position p) {
